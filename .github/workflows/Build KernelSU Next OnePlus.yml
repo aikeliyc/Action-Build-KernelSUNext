@@ -6,7 +6,7 @@ on:
         type: choice
         description: "配置文件"
         required: true
-        default: oneplus_ace2_pro_v
+        default: oneplus_pad_2_pro
         options:
           - oneplus_nord_ce4_lite_5g_v
           - oneplus_nord_ce4_v
@@ -48,12 +48,12 @@ on:
         type: string
         description: "自定义构建时间 (输入F使用当前时间)"
         required: false
-        default: "Mon Aug 18 09:30:24 UTC 2025"
+        default: "Tue Jun  3 03:22:33 UTC 2025"
       SUFFIX:
         type: string
         description: "自定义内核后缀 (不输入使用随机字符串)"
         required: false
-        default: ""
+        default: "8-g7b1f455c7143-ab13591283-4k"
       FAST_BUILD:
         type: boolean
         description: "是否启用极速构建？"
@@ -510,23 +510,7 @@ jobs:
           echo "CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG=y" >> "$CONFIG_FILE"
           echo "CONFIG_KSU_SUSFS_OPEN_REDIRECT=y" >> "$CONFIG_FILE"
 
-          # TMPFS配置*
-          echo "CONFIG_TMPFS_XATTR=y" >> "$CONFIG_FILE"
-          echo "CONFIG_TMPFS_POSIX_ACL=y" >> "$CONFIG_FILE"
 
-          # BBR配置*
-          echo "CONFIG_TCP_CONG_ADVANCED=y" >> "$CONFIG_FILE"
-          echo "CONFIG_TCP_CONG_BBR=y" >> "$CONFIG_FILE"
-          echo "CONFIG_NET_SCH_FQ=y" >> "$CONFIG_FILE"
-          echo "CONFIG_TCP_CONG_BIC=n" >> "$CONFIG_FILE"
-          echo "CONFIG_TCP_CONG_WESTWOOD=n" >> "$CONFIG_FILE"
-          echo "CONFIG_TCP_CONG_HTCP=n" >> "$CONFIG_FILE"
-
-          # ECN配置*
-          echo "CONFIG_IP_ECN=y" >> "$CONFIG_FILE"
-          echo "CONFIG_TCP_ECN=y" >> "$CONFIG_FILE"
-          echo "CONFIG_IPV6_ECN=y" >> "$CONFIG_FILE"
-          echo "CONFIG_IP_NF_TARGET_ECN=y" >> "$CONFIG_FILE"
 
           # 移除构建审查
           sed -i 's/check_defconfig//' ./common/build.config.gki
